@@ -523,11 +523,13 @@ export default function NetworksSettings() {
 
       {/* Footer actions */}
       <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-        <p className="text-sm text-muted-foreground">
-          {hasChanges
-            ? "You have unsaved changes"
-            : "Changes will apply immediately"}
-        </p>
+        {hasChanges ? (
+          <p className="text-sm text-muted-foreground">
+            You have unsaved changes
+          </p>
+        ) : (
+          <div />
+        )}
         <div className="flex items-center gap-3">
           {hasAnyCustom && (
             <Button variant="outline" size="sm" onClick={resetAll}>
