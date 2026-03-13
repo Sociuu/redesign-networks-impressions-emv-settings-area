@@ -51,13 +51,13 @@ interface NetworkRow {
 
 type FieldKey = "click" | "impressions" | "videoCount" | "cpm" | "reactions" | "comments";
 
-const FIELD_LABELS: Record<FieldKey, { label: string; isCurrencyBound: boolean }> = {
-  click: { label: "Click", isCurrencyBound: true },
-  impressions: { label: "Impressions", isCurrencyBound: false },
-  videoCount: { label: "Video Count", isCurrencyBound: true },
-  cpm: { label: "CPM", isCurrencyBound: true },
-  reactions: { label: "Reactions", isCurrencyBound: true },
-  comments: { label: "Comments", isCurrencyBound: true },
+const FIELD_LABELS: Record<FieldKey, { label: string; isCurrencyBound: boolean; description: string }> = {
+  click: { label: "Click", isCurrencyBound: true, description: "The estimated monetary value of organic social media engagement. This metric helps quantify the worth of unpaid social media exposure and interactions." },
+  impressions: { label: "Impressions", isCurrencyBound: false, description: "The number of times your content is displayed, regardless of whether it was clicked or not. This metric shows the potential reach of your content." },
+  videoCount: { label: "Video Count", isCurrencyBound: true, description: "The number of video views or video posts. Only available for Facebook and LinkedIn. This helps track video content performance." },
+  cpm: { label: "CPM", isCurrencyBound: true, description: "Cost per thousand impressions. This metric represents how much it would cost to reach 1,000 people with your content, used for calculating media value." },
+  reactions: { label: "Reactions", isCurrencyBound: true, description: "The number of reactions (likes, loves, etc.) your content receives. This measures emotional engagement with your posts." },
+  comments: { label: "Comments", isCurrencyBound: true, description: "The number of comments on your posts. This metric indicates deeper engagement and conversation around your content." },
 };
 
 const CURRENCIES = [
