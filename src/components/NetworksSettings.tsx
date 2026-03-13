@@ -282,7 +282,7 @@ export default function NetworksSettings() {
   );
 
   return (
-    <div className="mx-auto max-w-[1280px] space-y-6">
+    <div className="space-y-6">
       {/* Header */}
       <div>
         <h2 className="text-xl font-semibold text-foreground">
@@ -294,7 +294,7 @@ export default function NetworksSettings() {
       </div>
 
       {/* Currency selector */}
-      <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
+      <div className="flex items-center gap-4 rounded-lg border bg-muted/30 p-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
           <DollarSign className="h-5 w-5 text-accent-foreground" />
         </div>
@@ -410,7 +410,7 @@ export default function NetworksSettings() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border bg-card">
+      <div className="overflow-x-auto rounded-lg border">
         <table className="w-full">
           <thead>
             <tr className="border-b bg-muted/50">
@@ -444,7 +444,7 @@ export default function NetworksSettings() {
             {networks.map((network) => (
               <tr
                 key={network.id}
-                className="transition-colors bg-card"
+                className="transition-colors"
               >
                 {/* Network name */}
                 <td className="px-4 py-3">
@@ -522,7 +522,7 @@ export default function NetworksSettings() {
       </div>
 
       {/* Footer actions */}
-      <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
+      <div className="flex items-center justify-between rounded-lg border bg-muted/30 px-4 py-3">
         {hasChanges ? (
           <p className="text-sm text-muted-foreground">
             You have unsaved changes
