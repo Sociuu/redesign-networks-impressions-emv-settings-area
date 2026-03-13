@@ -14,6 +14,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { toast } from "sonner";
 import {
   RotateCcw,
@@ -24,6 +31,7 @@ import {
   Instagram,
   Linkedin,
   Info,
+  BookOpen,
 } from "lucide-react";
 
 // --- Types ---
@@ -43,13 +51,13 @@ interface NetworkRow {
 
 type FieldKey = "click" | "impressions" | "videoCount" | "cpm" | "reactions" | "comments";
 
-const FIELD_LABELS: Record<FieldKey, { label: string; isCurrencyBound: boolean }> = {
-  click: { label: "Click", isCurrencyBound: true },
-  impressions: { label: "Impressions", isCurrencyBound: false },
-  videoCount: { label: "Video Count", isCurrencyBound: true },
-  cpm: { label: "CPM", isCurrencyBound: true },
-  reactions: { label: "Reactions", isCurrencyBound: true },
-  comments: { label: "Comments", isCurrencyBound: true },
+const FIELD_LABELS: Record<FieldKey, { label: string; isCurrencyBound: boolean; description: string }> = {
+  click: { label: "Click", isCurrencyBound: true, description: "The estimated monetary value of organic social media engagement. This metric helps quantify the worth of unpaid social media exposure and interactions." },
+  impressions: { label: "Impressions", isCurrencyBound: false, description: "The number of times your content is displayed, regardless of whether it was clicked or not. This metric shows the potential reach of your content." },
+  videoCount: { label: "Video Count", isCurrencyBound: true, description: "The number of video views or video posts. Only available for Facebook and LinkedIn. This helps track video content performance." },
+  cpm: { label: "CPM", isCurrencyBound: true, description: "Cost per thousand impressions. This metric represents how much it would cost to reach 1,000 people with your content, used for calculating media value." },
+  reactions: { label: "Reactions", isCurrencyBound: true, description: "The number of reactions (likes, loves, etc.) your content receives. This measures emotional engagement with your posts." },
+  comments: { label: "Comments", isCurrencyBound: true, description: "The number of comments on your posts. This metric indicates deeper engagement and conversation around your content." },
 };
 
 const CURRENCIES = [
@@ -313,24 +321,79 @@ export default function NetworksSettings() {
 
       {/* EMV section */}
       <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-            Earned Media Values
-          </h3>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button className="text-muted-foreground hover:text-foreground transition-colors">
-                <HelpCircle className="h-4 w-4" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p>
-                EMV estimates the cost saving of organic reach via employee
-                advocacy vs. paid ads. Values marked as "Custom" were set by
-                your team.
-              </p>
-            </TooltipContent>
-          </Tooltip>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+              Earned Media Values
+            </h3>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button className="text-muted-foreground hover:text-foreground transition-colors">
+                  <HelpCircle className="h-4 w-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>
+                  EMV estimates the cost saving of organic reach via employee
+                  advocacy vs. paid ads. Values marked as "Custom" were set by
+                  your team.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground gap-1.5">
+                <BookOpen className="h-4 w-4" />
+                Learn more about EMV
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="overflow-y-auto sm:max-w-lg">
+              <SheetHeader className="pb-4">
+                <SheetTitle className="text-xl">Network Metrics Explained</SheetTitle>
+                <p className="text-sm text-muted-foreground">
+                  Understand what each metric means and how it's used in your Employee Advocacy campaigns.
+                </p>
+              </SheetHeader>
+              <div className="space-y-1 pt-2">
+                {/* Default column explanation */}
+                <div className="rounded-lg border bg-card p-4 border-l-4 border-l-primary">
+                  <h4 className="text-sm font-semibold text-foreground">Selected by default</h4>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    When enabled, this network will be automatically selected when creating new campaigns or sharing content.
+                  </p>
+                </div>
+
+                {/* Metric explanations */}
+                {FIELD_KEYS.map((key) => {
+                  const field = FIELD_LABELS[key];
+                  return (
+                    <div key={key} className="rounded-lg border bg-card p-4 border-l-4 border-l-primary">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-foreground">{field.label}</h4>
+                        {field.isCurrencyBound && (
+                          <span className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium text-accent-foreground">
+                            <DollarSign className="h-3 w-3 mr-0.5" />
+                            Currency-bound
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">{field.description}</p>
+                    </div>
+                  );
+                })}
+
+                {/* Note */}
+                <div className="rounded-lg bg-accent/50 border border-primary/20 p-4 mt-4">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium text-accent-foreground">Note:</span>{" "}
+                    These default values are used as baseline metrics for calculations and reporting across your Employee Advocacy platform. You can customize them based on your organization's specific needs and industry benchmarks.
+                  </p>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
 
         {/* Legend */}
@@ -460,11 +523,13 @@ export default function NetworksSettings() {
 
       {/* Footer actions */}
       <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
-        <p className="text-sm text-muted-foreground">
-          {hasChanges
-            ? "You have unsaved changes"
-            : "Changes will apply immediately"}
-        </p>
+        {hasChanges ? (
+          <p className="text-sm text-muted-foreground">
+            You have unsaved changes
+          </p>
+        ) : (
+          <div />
+        )}
         <div className="flex items-center gap-3">
           {hasAnyCustom && (
             <Button variant="outline" size="sm" onClick={resetAll}>
