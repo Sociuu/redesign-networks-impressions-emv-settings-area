@@ -18,7 +18,7 @@ const TABS = [
 const Index = () => {
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background">
+     <div className="min-h-screen bg-muted">
         {/* Page header */}
         <div className="border-b bg-card px-6 pt-8 pb-0">
           <h1 className="text-2xl font-semibold text-foreground mb-6">Settings</h1>
