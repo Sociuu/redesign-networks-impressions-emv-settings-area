@@ -14,6 +14,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { toast } from "sonner";
 import {
   RotateCcw,
@@ -24,6 +31,7 @@ import {
   Instagram,
   Linkedin,
   Info,
+  BookOpen,
 } from "lucide-react";
 
 // --- Types ---
