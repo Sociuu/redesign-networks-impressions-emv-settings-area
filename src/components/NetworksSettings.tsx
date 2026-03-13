@@ -24,12 +24,6 @@ import {
   Instagram,
   Linkedin,
   Info,
-  Save,
-  HelpCircle,
-  DollarSign,
-  Facebook,
-  Instagram,
-  Linkedin,
 } from "lucide-react";
 
 // --- Types ---
