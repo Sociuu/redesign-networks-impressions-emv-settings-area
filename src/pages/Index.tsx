@@ -41,7 +41,9 @@ const Index = () => {
 
         {/* Content */}
         <div className="px-6 py-8">
-          <NetworksSettings />
+          <div className="mx-auto max-w-[1280px] rounded-lg border bg-card p-6 shadow-sm">
+            <NetworksSettings />
+          </div>
         </div>
       </div>
     </TooltipProvider>
