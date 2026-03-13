@@ -410,7 +410,7 @@ export default function NetworksSettings() {
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border bg-card">
+      <div className="overflow-x-auto rounded-lg border">
         <table className="w-full">
           <thead>
             <tr className="border-b bg-muted/50">
