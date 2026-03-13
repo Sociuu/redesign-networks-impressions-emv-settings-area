@@ -282,7 +282,7 @@ export default function NetworksSettings() {
   );
 
   return (
-    <div className="mx-auto max-w-[1280px] space-y-6">
+    <div className="space-y-6">
       {/* Header */}
       <div>
         <h2 className="text-xl font-semibold text-foreground">
