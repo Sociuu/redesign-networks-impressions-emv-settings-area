@@ -294,7 +294,7 @@ export default function NetworksSettings() {
       </div>
 
       {/* Currency selector */}
-      <div className="flex items-center gap-4 rounded-lg border bg-card p-4">
+      <div className="flex items-center gap-4 rounded-lg border bg-muted/30 p-4">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-accent">
           <DollarSign className="h-5 w-5 text-accent-foreground" />
         </div>
