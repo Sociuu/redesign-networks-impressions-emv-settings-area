@@ -321,24 +321,79 @@ export default function NetworksSettings() {
 
       {/* EMV section */}
       <div className="space-y-3">
-        <div className="flex items-center gap-2">
-          <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
-            Earned Media Values
-          </h3>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <button className="text-muted-foreground hover:text-foreground transition-colors">
-                <HelpCircle className="h-4 w-4" />
-              </button>
-            </TooltipTrigger>
-            <TooltipContent className="max-w-xs">
-              <p>
-                EMV estimates the cost saving of organic reach via employee
-                advocacy vs. paid ads. Values marked as "Custom" were set by
-                your team.
-              </p>
-            </TooltipContent>
-          </Tooltip>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+              Earned Media Values
+            </h3>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <button className="text-muted-foreground hover:text-foreground transition-colors">
+                  <HelpCircle className="h-4 w-4" />
+                </button>
+              </TooltipTrigger>
+              <TooltipContent className="max-w-xs">
+                <p>
+                  EMV estimates the cost saving of organic reach via employee
+                  advocacy vs. paid ads. Values marked as "Custom" were set by
+                  your team.
+                </p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground gap-1.5">
+                <BookOpen className="h-4 w-4" />
+                Learn more about EMV
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="overflow-y-auto sm:max-w-lg">
+              <SheetHeader className="pb-4">
+                <SheetTitle className="text-xl">Network Metrics Explained</SheetTitle>
+                <p className="text-sm text-muted-foreground">
+                  Understand what each metric means and how it's used in your Employee Advocacy campaigns.
+                </p>
+              </SheetHeader>
+              <div className="space-y-1 pt-2">
+                {/* Default column explanation */}
+                <div className="rounded-lg border bg-card p-4 border-l-4 border-l-primary">
+                  <h4 className="text-sm font-semibold text-foreground">Selected by default</h4>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    When enabled, this network will be automatically selected when creating new campaigns or sharing content.
+                  </p>
+                </div>
+
+                {/* Metric explanations */}
+                {FIELD_KEYS.map((key) => {
+                  const field = FIELD_LABELS[key];
+                  return (
+                    <div key={key} className="rounded-lg border bg-card p-4 border-l-4 border-l-primary">
+                      <div className="flex items-center gap-2">
+                        <h4 className="text-sm font-semibold text-foreground">{field.label}</h4>
+                        {field.isCurrencyBound && (
+                          <span className="inline-flex items-center rounded-full bg-accent px-2 py-0.5 text-[10px] font-medium text-accent-foreground">
+                            <DollarSign className="h-3 w-3 mr-0.5" />
+                            Currency-bound
+                          </span>
+                        )}
+                      </div>
+                      <p className="mt-1 text-sm text-muted-foreground">{field.description}</p>
+                    </div>
+                  );
+                })}
+
+                {/* Note */}
+                <div className="rounded-lg bg-accent/50 border border-primary/20 p-4 mt-4">
+                  <p className="text-sm text-muted-foreground">
+                    <span className="font-medium text-accent-foreground">Note:</span>{" "}
+                    These default values are used as baseline metrics for calculations and reporting across your Employee Advocacy platform. You can customize them based on your organization's specific needs and industry benchmarks.
+                  </p>
+                </div>
+              </div>
+            </SheetContent>
+          </Sheet>
         </div>
 
         {/* Legend */}
