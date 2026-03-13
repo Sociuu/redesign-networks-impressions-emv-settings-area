@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { Switch } from "@/components/ui/switch";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -23,6 +23,7 @@ import {
   Facebook,
   Instagram,
   Linkedin,
+  Info,
 } from "lucide-react";
 
 // --- Types ---
@@ -354,7 +355,7 @@ export default function NetworksSettings() {
                 Network
               </th>
               <th className="px-3 py-3 text-center text-xs font-medium uppercase tracking-wider text-muted-foreground w-[100px]">
-                Active
+                Default
               </th>
               {FIELD_KEYS.map((key) => (
                 <th
@@ -380,11 +381,7 @@ export default function NetworksSettings() {
             {networks.map((network) => (
               <tr
                 key={network.id}
-                className={`transition-colors ${
-                  network.enabled
-                    ? "bg-card"
-                    : "bg-muted/30 opacity-60"
-                }`}
+                className="transition-colors bg-card"
               >
                 {/* Network name */}
                 <td className="px-4 py-3">
@@ -396,12 +393,14 @@ export default function NetworksSettings() {
                   </div>
                 </td>
 
-                {/* Toggle */}
+                {/* Default checkbox */}
                 <td className="px-3 py-3 text-center">
-                  <Switch
-                    checked={network.enabled}
-                    onCheckedChange={() => toggleNetwork(network.id)}
-                  />
+                  <div className="flex justify-center">
+                    <Checkbox
+                      checked={network.enabled}
+                      onCheckedChange={() => toggleNetwork(network.id)}
+                    />
+                  </div>
                 </td>
 
                 {/* Value fields */}
@@ -410,19 +409,16 @@ export default function NetworksSettings() {
                   const isNA = field.value === "N/A";
                   return (
                     <td key={key} className="px-3 py-3">
-                      <div className="relative flex items-center gap-1">
-                        {field.isCustom && (
-                          <span className="absolute -left-1 top-1/2 -translate-y-1/2 h-6 w-0.5 rounded-full bg-custom-indicator" />
-                        )}
+                      <div className="flex items-center gap-1">
                         <Input
                           value={field.value}
-                          disabled={!network.enabled || isNA}
+                          disabled={isNA}
                           onChange={(e) =>
                             updateField(network.id, key, e.target.value)
                           }
                           className={`h-8 w-[90px] text-sm ${
                             field.isCustom
-                              ? "border-custom-indicator/40 bg-custom-bg"
+                              ? "bg-custom-bg"
                               : ""
                           } ${isNA ? "text-muted-foreground" : ""}`}
                         />
@@ -446,6 +442,19 @@ export default function NetworksSettings() {
               </tr>
             ))}
           </tbody>
+          <tfoot>
+            <tr>
+              <td colSpan={FIELD_KEYS.length + 2} className="px-4 py-3 border-t bg-muted/30">
+                <div className="flex items-start gap-2 text-xs text-muted-foreground">
+                  <Info className="h-4 w-4 shrink-0 mt-0.5" />
+                  <p>
+                    <span className="font-medium text-foreground">EMV Calculation:</span>{" "}
+                    These values determine the potential cost savings by using our Employee Advocacy platform compared to paid advertising. Currency changes automatically recalculate default values based on exchange rates, while custom values remain unchanged.
+                  </p>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
         </table>
       </div>
 
