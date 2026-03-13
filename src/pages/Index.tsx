@@ -1,4 +1,5 @@
 import NetworksSettings from "@/components/NetworksSettings";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const TABS = [
   "General Settings",
