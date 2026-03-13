@@ -444,7 +444,7 @@ export default function NetworksSettings() {
             {networks.map((network) => (
               <tr
                 key={network.id}
-                className="transition-colors bg-card"
+                className="transition-colors"
               >
                 {/* Network name */}
                 <td className="px-4 py-3">
